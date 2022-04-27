@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700;900&display=swap');
+
+* {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.square-128x128 {
+    object-fit: cover;
+    width: 128px !important;
+    height: 128px !important;
+}
+
+.author-list > div {
+    width: 128px;
+}
+
+.border-none {
+    border: none;
+}

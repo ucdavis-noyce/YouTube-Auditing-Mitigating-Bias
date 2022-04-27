@@ -1,0 +1,25 @@
+{
+  "name": "youtube-auditing-mitigating-bias",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucdavis-noyce/YouTube-Auditing-Mitigating-Bias.git"
+  },
+  "author": "Muhammad Haroon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ucdavis-noyce/YouTube-Auditing-Mitigating-Bias/issues"
+  },
+  "homepage": "https://github.com/ucdavis-noyce/YouTube-Auditing-Mitigating-Bias#readme",
+  "devDependencies": {
+    "grunt": "^1.5.2",
+    "grunt-bake": "^1.9.0",
+    "grunt-contrib-clean": "^2.0.1",
+    "grunt-contrib-copy": "^1.0.0"
+  }
+}
