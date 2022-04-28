@@ -1,0 +1,32 @@
+.youtube-video {
+    margin: 8px;
+}
+
+
+.recommendation-trail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.recommendation-trail ul {
+    list-style: none;
+    text-align: center;
+}
+
+.recommendation-trail li {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recommendation-trail li span.right-arrow {
+    align-self: center;
+}
+
+.recommendation-trail ul:last-child > li span.right-arrow {
+    display: none;
+}

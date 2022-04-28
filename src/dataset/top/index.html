@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Top Recommendations</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../common/css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>const PAGE_NAME = 'dataset';</script>
+    <!--(bake /src/includes/head.html)-->
+
+</head>
+
+<body>
+
+    <!--(bake /src/includes/header.html)-->
+
+    <article class="section">
+        <div class="container is-max-desktop">
+            <a class="subtitle has-text-danger has-text-weight-bold mb-3">Daily Top Recommendations</a>
+            <p>
+                View the top recommendations for left, center, and right sock puppets.
+            </p>
+        </div>
+    </article>
+
+    <article class="section has-background-light" id="app">
+        <div class="container is-max-desktop">
+            <p class="has-text-centered is-size-5 mb-6"><span class="has-text-danger has-text-weight-bold">Step 1</span><br>Choose a date to view sock puppets from</p>
+
+            <div class="is-flex is-align-items-center">
+                <div class="mr-2">
+                    <span>Date</span>
+                </div>
+                <div class="control datepicker has-icons-left" v-if="dates">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-calendar"></i>
+                    </span>
+                    <vuejs-datepicker v-model="selectedDate" class="input" @selected="loadDate" :disabled-dates="disabledDates"></vuejs-datepicker>
+                </div>
+                <div class="control ml-6">
+                    <label class="checkbox">
+                        <input type="checkbox" v-model="removeCommon">
+                        Remove common videos
+                    </label>    
+                </div>
+                <div class="control ml-4">
+                    <label class="checkbox">
+                        <input type="checkbox" v-model="removeNoSlant">
+                        Remove videos with no slant
+                    </label>    
+                </div>
+            </div>
+        </div>
+        <div class="container is-fluid mt-6">
+            <div v-if="topVideos" class="columns top-videos">
+                <div class="column">
+                    <h2 class="subtitle">Left Sock Puppets</h2>
+                    <youtube-video :video-id="video" v-for="video in leftVideos" :key="video"
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                </div>
+                <!-- <div class="column">
+                    <h2 class="subtitle">Center-left</h2>
+                    <youtube-video :video-id="video" v-for="video in centerLeftVideos" :key="video"
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                </div> -->
+                <div class="column">
+                    <h2 class="subtitle">Center Sock Puppets</h2>
+                    <youtube-video :video-id="video" v-for="video in centerVideos" :key="video"
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                </div>
+                <!-- <div class="column">
+                    <h2 class="subtitle">Center-right</h2>
+                    <youtube-video :video-id="video" v-for="video in centerRightVideos" :key="video"
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                </div> -->
+                <div class="column">
+                    <h2 class="subtitle">Right Sock Puppets</h2>
+                    <youtube-video :video-id="video" v-for="video in rightVideos" :key="video"
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <!--(bake /src/includes/footer.html)-->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuejs-datepicker@1.6.2/dist/vuejs-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.0/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/plugin/relativeTime.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/plugin/customParseFormat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+    <script src="../common/js/api.js"></script>
+    <script src="../common/js/scripts.js"></script>
+    <script src="../common/components/youtube-video.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
