@@ -21,6 +21,7 @@ const app = new Vue({
             this.puppetId = null;
             this.puppetData = null;
             this.numSockPuppets = await getNumSockPuppets(ideology);
+            await this.loadRandom();
         },
 
         downloadPuppet: async function () {
@@ -48,13 +49,6 @@ const app = new Vue({
     },
 
     computed: {
-        numSockPuppetsPrompt: function () {
-            if (this.numSockPuppets) {
-                return 'Total # of sock puppets: ' + this.numSockPuppets;
-            }
-            return ' ';
-        },
-
         trainingData: function () {
             if (this.puppetData) {
                 return this.puppetData.args.training.split(',');
@@ -112,8 +106,22 @@ const app = new Vue({
             }
 
             return recommendations;
-        }
+        },
 
+
+        sockPuppetDate: function () {
+            if (this.puppetData) {
+                return dayjs(this.puppetData.start_time).format('MMM D, YYYY');
+            }
+        },
+
+    },
+    
+
+    filters: {
+        number: function(x) {
+            return numeral(x).format('0,0');
+        }
     }
 
 });

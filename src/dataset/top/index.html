@@ -28,27 +28,29 @@
         </div>
     </article>
 
-    <article class="section has-background-light" id="app">
+    <article class="section" id="app">
         <div class="container is-max-desktop">
-            <p class="has-text-centered is-size-5 mb-6"><span class="has-text-danger has-text-weight-bold">Step 1</span><br>Choose a date to view sock puppets from</p>
 
-            <div class="is-flex is-align-items-center">
-                <div class="mr-2">
-                    <span>Date</span>
+            <div class="is-flex is-justify-content-space-around">
+                <div class="is-flex is-flex-direction-column is-align-items-center">
+                    <span class="has-text-danger mb-1">Collection Date</span>
+                    <div class="control datepicker has-icons-left" v-if="dates">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-calendar"></i>
+                        </span>
+                        <vuejs-datepicker v-model="selectedDate" class="input" @selected="loadDate" :disabled-dates="disabledDates"></vuejs-datepicker>
+                    </div>
                 </div>
-                <div class="control datepicker has-icons-left" v-if="dates">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-calendar"></i>
-                    </span>
-                    <vuejs-datepicker v-model="selectedDate" class="input" @selected="loadDate" :disabled-dates="disabledDates"></vuejs-datepicker>
-                </div>
-                <div class="control ml-6">
+            </div>
+            <br>
+            <div class="is-flex is-justify-content-space-evenly">
+                <div class="control">
                     <label class="checkbox">
                         <input type="checkbox" v-model="removeCommon">
                         Remove common videos
                     </label>    
                 </div>
-                <div class="control ml-4">
+                <div class="control">
                     <label class="checkbox">
                         <input type="checkbox" v-model="removeNoSlant">
                         Remove videos with no slant
@@ -56,6 +58,9 @@
                 </div>
             </div>
         </div>
+        
+        <br><br><br>
+
         <div class="container is-fluid mt-6">
             <div v-if="topVideos" class="columns top-videos">
                 <div class="column">

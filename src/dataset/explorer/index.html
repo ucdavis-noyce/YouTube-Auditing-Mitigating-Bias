@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <script>const PAGE_NAME = 'dataset';</script>
+    <script>
+        const PAGE_NAME = 'dataset';
+    </script>
     <!--(bake /src/includes/head.html)-->
 </head>
 
@@ -27,31 +29,39 @@
     </article>
 
 
-    <article class="section has-background-light" id="app">
+    <article class="section" id="app">
         <div class="container is-max-desktop">
-            <p class="has-text-centered is-size-5 mb-6"><span class="has-text-danger has-text-weight-bold">Step 1</span><br>Choose an ideology</p>
+
+            <p class="has-text-centered is-size-5 mb-4"><span class="has-text-danger has-text-weight-bold">Sock Puppet Ideology</p>
+
             <div class="tabs is-boxed">
                 <ul class="is-justify-content-space-around">
-                    <li v-for="ideology in ideologies" 
-                        @click="setIdeology(ideology)"
+                    <li v-for="ideology in ideologies" @click="setIdeology(ideology)"
                         :class="{'is-active': selectedIdeology == ideology}">
                         <a :class="{'has-text-danger': selectedIdeology == ideology}">{{ ideology }}</a>
                     </li>
                 </ul>
             </div>
 
-            <br><br><br>
-            <p v-if="selectedIdeology" class="has-text-centered is-size-5 mb-6"><span class="has-text-danger has-text-weight-bold">Step 2</span><br>Enter a sock puppet ID</p>
+            <!-- <div class="has-text-centered mt-6" v-if="selectedIdeology">
+                <h2 class="is-size-6">
+                    The total number of <span class="has-text-danger">{{ selectedIdeology }}</span> ideology sock puppets is <span class="has-text-danger">{{ numSockPuppets }}</span>.
+                </h2>
+            </div> -->
 
-            <div class="is-flex">
+            <!-- <br><br><br> -->
+
+            <!-- <p v-if="selectedIdeology" class="has-text-centered is-size-5 mb-6"><span class="has-text-danger has-text-weight-bold">Step 2</span><br>Enter a sock puppet ID or click Random</p> -->
+
+            <div class="is-flex mt-6">
                 <div class="ml-1 is-flex is-flex-direction-column">
-                    <input class="input" type="text" placeholder="Sock puppet ID" v-model="puppetId" v-if="selectedIdeology">
-                    <span>{{ numSockPuppetsPrompt }}</span>
+                    <input class="input" type="text" placeholder="Sock puppet ID" v-model="puppetId"
+                        v-if="selectedIdeology">
+                    <span class="ml-1"><span class="has-text-danger">{{ numSockPuppets | number }}</span> total sock
+                        puppets.</span>
                 </div>
                 <div class="ml-1">
-                    <button @click="loadPuppet(puppetId)" 
-                        class="button" 
-                        :disabled="selectedPuppetId == puppetId"
+                    <button @click="loadPuppet(puppetId)" class="button" :disabled="selectedPuppetId == puppetId"
                         v-if="selectedIdeology">
                         <span class="icon is-small">
                             <i class="fas fa-arrow-down" aria-hidden="true"></i>
@@ -66,24 +76,38 @@
                     </button>
                 </div>
                 <div class="ml-auto">
-                    <button @click="downloadPuppet(puppetId)" 
-                        class="button" 
+                    <button @click="downloadPuppet(puppetId)" class="button"
                         v-if="selectedIdeology && selectedPuppetId">
                         <span class="icon is-small">
                             <i class="fas fa-download"></i>
-                        </span>    
+                        </span>
                         <span>Download</span>
                     </button>
                 </div>
             </div>
 
-            <p v-if="selectedPuppetId" class="has-text-centered is-size-5 mt-6 mb-6"><span class="has-text-danger has-text-weight-bold">Step 3</span><br>Select which videos to watch</p>
+
+            <div class="has-text-centered mt-6" v-if="selectedPuppetId">
+                <h2 class="is-size-6">
+                    Sock puppet <span class="has-text-danger">#{{ selectedPuppetId | number }}</span> was collected on <span class="has-text-danger">{{ sockPuppetDate }}</span>.
+                </h2>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+            <!-- <p v-if="selectedPuppetId" class="has-text-centered is-size-5 mt-6 mb-6"><span class="has-text-danger has-text-weight-bold">Step 3</span><br>Select which videos from the sock puppet to view</p> -->
+            <p class="has-text-centered is-size-5 mb-4"><span class="has-text-danger has-text-weight-bold">Videos/Recommendations to view</p>
 
             <div class="tabs mt-6 is-boxed" v-if="selectedPuppetId">
                 <ul class="is-justify-content-space-around">
-                    <li @click="panel = 'training'" :class="{'is-active': panel == 'training'}"><a :class="{'has-text-danger':  panel == 'training'}">Training</a></li>
-                    <li @click="panel = 'homepage'" :class="{'is-active': panel == 'homepage'}"><a :class="{'has-text-danger':  panel == 'homepage'}">Homepage</a></li>
-                    <li @click="panel = 'testing'" :class="{'is-active': panel == 'testing' }"><a :class="{'has-text-danger':  panel == 'testing'}">Up-next</a></li>
+                    <li @click="panel = 'training'" :class="{'is-active': panel == 'training'}"><a
+                            :class="{'has-text-danger':  panel == 'training'}">Training</a></li>
+                    <li @click="panel = 'homepage'" :class="{'is-active': panel == 'homepage'}"><a
+                            :class="{'has-text-danger':  panel == 'homepage'}">Homepage</a></li>
+                    <li @click="panel = 'testing'" :class="{'is-active': panel == 'testing' }"><a
+                            :class="{'has-text-danger':  panel == 'testing'}">Up-next</a></li>
                 </ul>
             </div>
 
@@ -91,24 +115,28 @@
         <div class="container is-fluid mt-6">
 
             <div class="videos" v-if="panel == 'training'">
-                <youtube-video :video-id="video" v-for="video in trainingData" :key="video.videoId" :metadata="puppetData.metadata[video]" :slant="puppetData.slants[video]" hide-embed="true"></youtube-video>
+                <youtube-video :video-id="video" v-for="video in trainingData" :key="video.videoId"
+                    :metadata="puppetData.metadata[video]" :slant="puppetData.slants[video]" hide-embed="true">
+                </youtube-video>
             </div>
 
 
             <div class="videos" v-if="panel == 'homepage'">
-                <youtube-video :video-id="video" v-for="video in homepageData" :key="video.videoId" :metadata="puppetData.metadata[video]" :slant="puppetData.slants[video]"></youtube-video>
+                <youtube-video :video-id="video" v-for="video in homepageData" :key="video.videoId"
+                    :metadata="puppetData.metadata[video]" :slant="puppetData.slants[video]"></youtube-video>
             </div>
 
 
             <div class="recommendation-trail" v-if="panel == 'testing'">
                 <ul class="recommendation" v-for="(videos, iteration) in testingData" :key="videos">
                     <li v-for="video in videos.slice(0,1)" :key="video.videoId">
-                        <p class="mb-4">Depth: {{ iteration }}</p>
-                        <youtube-video :video-id="video" :metadata="puppetData.metadata[video]" :slant="puppetData.slants[video]"></youtube-video>    
+                        <p class="mb-4">Trail depth: {{ iteration }}</p>
+                        <youtube-video :video-id="video" :metadata="puppetData.metadata[video]"
+                            :slant="puppetData.slants[video]"></youtube-video>
                         <span class="right-arrow mb-6"><i class="fa-solid fa-arrow-down"></i></span>
                     </li>
                 </ul>
-           </div>
+            </div>
 
         </div>
     </article>
