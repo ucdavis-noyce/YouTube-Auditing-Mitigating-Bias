@@ -7,8 +7,8 @@ const app = new Vue({
         dates: null,
         topVideos: null,
         commonVideos: null,
-        removeCommon: false,
-        removeNoSlant: false
+        removeCommon: true,
+        removeNoSlant: true
     },
 
     methods: {
