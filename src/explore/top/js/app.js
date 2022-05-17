@@ -18,7 +18,7 @@ const app = new Vue({
         },
 
         loadDate: async function(date) {
-            this.selectedDate = dayjs(date).format('YYYY-MM-DD');
+            this.selectedDate = date;
             this.topVideos = await getTopVideos(this.selectedDate);
         },
 
@@ -38,7 +38,7 @@ const app = new Vue({
 
     created: async function() {
         this.dates = await getSockPuppetDates();
-        await this.loadDate('2022-03-21');
+        await this.loadDate('2022-03-20');
     },
 
     computed: {
