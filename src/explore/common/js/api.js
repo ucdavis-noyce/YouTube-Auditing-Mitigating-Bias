@@ -1,4 +1,4 @@
-const API_PATH = "https://youtubeaudit.com/api"
+const API_PATH = "http://localhost:8000/api"
 
 async function getNumSockPuppets(ideology) {
     const req = await fetch(`${API_PATH}/getNumSockPuppets/${ideology}`);
