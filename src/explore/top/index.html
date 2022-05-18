@@ -64,7 +64,7 @@
         <div class="container is-fluid mt-6">
             <div v-if="topVideos" class="columns top-videos">
                 <div class="column">
-                    <h2 class="subtitle">Left<br>Sock Puppets</h2>
+                    <h2 class="subtitle">Left</h2>
                     <youtube-video :video-id="video" v-for="video in leftVideos" :key="video"
                         :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
                 </div>
@@ -74,7 +74,7 @@
                         :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
                 </div> -->
                 <div class="column">
-                    <h2 class="subtitle">Center<br>Sock Puppets</h2>
+                    <h2 class="subtitle">Center</h2>
                     <youtube-video :video-id="video" v-for="video in centerVideos" :key="video"
                         :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
                 </div>
@@ -84,7 +84,7 @@
                         :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
                 </div> -->
                 <div class="column">
-                    <h2 class="subtitle">Right<br>Sock Puppets</h2>
+                    <h2 class="subtitle">Right</h2>
                     <youtube-video :video-id="video" v-for="video in rightVideos" :key="video"
                         :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
                 </div>
