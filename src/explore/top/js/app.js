@@ -18,8 +18,8 @@ const app = new Vue({
         },
 
         loadDate: async function(date) {
-            this.selectedDate = dayjs(date).format('YYYY-MM-DD');
-            this.topVideos = await getTopVideos(this.selectedDate);
+            const formatted = dayjs(date).utc().format('YYYY-MM-DD');
+            this.topVideos = await getTopVideos(formatted);
         },
 
         getVideoList: function(key) {
@@ -38,7 +38,8 @@ const app = new Vue({
 
     created: async function() {
         this.dates = await getSockPuppetDates();
-        await this.loadDate(this.dates.slice(-1)[0]);
+        this.setDate(this.dates.slice(-1)[0]);
+        await this.loadDate(this.selectedDate);
     },
 
     computed: {
@@ -47,7 +48,7 @@ const app = new Vue({
             const self = this;
             return {
                 customPredictor: function(date) {
-                    const formatted = dayjs(date).format('YYYY-MM-DD');
+                    const formatted = dayjs(date).utc().format('YYYY-MM-DD');
                     return !self.dates.includes(formatted);
                 }
             }

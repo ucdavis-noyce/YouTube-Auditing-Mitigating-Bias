@@ -20,3 +20,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 dayjs.extend(window.dayjs_plugin_relativeTime);
+dayjs.extend(window.dayjs_plugin_utc);
