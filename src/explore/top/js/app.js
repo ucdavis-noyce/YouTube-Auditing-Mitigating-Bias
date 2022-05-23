@@ -8,7 +8,7 @@ const app = new Vue({
         topVideos: null,
         commonVideos: null,
         removeCommon: true,
-        removeNoSlant: true
+        removeNoSlant: false
     },
 
     methods: {
