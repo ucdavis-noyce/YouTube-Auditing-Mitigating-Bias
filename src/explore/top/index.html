@@ -38,7 +38,7 @@
                         <span class="icon is-small is-left">
                             <i class="fas fa-calendar"></i>
                         </span>
-                        <vuejs-datepicker v-model="selectedDate" class="input" @selected="loadDate" :disabled-dates="disabledDates"></vuejs-datepicker>
+                        <vuejs-datepicker v-model="selectedDate" class="input" @selected="loadDate" use-utc="true" :disabled-dates="disabledDates"></vuejs-datepicker>
                     </div>
                 </div>
             </div>
