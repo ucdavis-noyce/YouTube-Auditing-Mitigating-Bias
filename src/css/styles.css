@@ -125,3 +125,7 @@ div.datepicker input {
 .top-videos.columns .column:not(:last-child) {
     border-right: solid 2px black;
 }
+
+footer img {
+    width: 150px;
+}
