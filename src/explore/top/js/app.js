@@ -38,7 +38,7 @@ const app = new Vue({
 
     created: async function() {
         this.dates = await getSockPuppetDates();
-        this.setDate(this.dates.slice(-1)[0]);
+        this.setDate(this.dates.slice(-2)[0]);
         await this.loadDate(this.selectedDate);
     },
 
