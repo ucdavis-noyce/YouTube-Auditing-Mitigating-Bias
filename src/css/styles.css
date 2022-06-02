@@ -114,18 +114,6 @@ div.datepicker input {
     display: flex;
 }
 
-.top-videos.columns .youtube-video {
-    vertical-align: top;
-}
-
-.top-videos.columns .column {
-    text-align: center;
-}
-
-.top-videos.columns .column:not(:last-child) {
-    border-right: solid 2px black;
-}
-
 footer img {
     width: 150px;
 }
