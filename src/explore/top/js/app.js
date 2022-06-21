@@ -24,7 +24,8 @@ const app = new Vue({
 
         download: async function () {
             var blob = new Blob([JSON.stringify(this.topVideos)], {type: "application/json;charset=utf-8"});
-            saveAs(blob, `top-recommendations-${this.selectedDate}.json`);
+            const formatted = dayjs(this.selectedDate).utc().format('YYYY-MM-DD');
+            saveAs(blob, `top-recommendations-${formatted}.json`);
         },
 
         getVideoList: function(key) {
