@@ -22,6 +22,11 @@ const app = new Vue({
             this.topVideos = await getTopVideos(formatted);
         },
 
+        download: async function () {
+            var blob = new Blob([JSON.stringify(this.topVideos)], {type: "application/json;charset=utf-8"});
+            saveAs(blob, `top-recommendations-${this.selectedDate}.json`);
+        },
+
         getVideoList: function(key) {
             if (!this.topVideos[key]) {
                 return [];

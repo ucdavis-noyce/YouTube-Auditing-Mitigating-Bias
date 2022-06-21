@@ -1,6 +1,6 @@
 Vue.component('youtube-video', {
     template: `
-    <a :href="url" target="_blank" class="youtube-video" :style="{ 'display': display }">
+    <div class="youtube-video" :style="{ 'display': display }">
         <div class="slant-range" :class="{ 'is-invisible': !getSlantScore() }">
             <div class="slant-range-slider" :style="{ 'left': sliderLeft }">
                 <i class="fas fa-arrow-down is-size-4"></i>
@@ -15,9 +15,9 @@ Vue.component('youtube-video', {
             <img v-if="hideEmbed" :src="thumbnail" class="yt-thumbnail">
         </div>
         <div class="yt-metadata mt-2">
-            <div class="yt-title" :title="title">
+            <a target="_blank" :href="url" class="yt-title" :title="title">
                 {{ title }}
-            </div>
+            </a>
             <div class="tooltip">
                 <span>{{ channelName }}</span>
             </div>
@@ -25,7 +25,7 @@ Vue.component('youtube-video', {
                 <span>{{ views }}{{ likes }}{{ publishDate }}</span>
             </div>
         </div>
-    </a>
+    </div>
     `,
     props: ['videoId',  'hideUnks', 'metadata', 'slant', 'hideEmbed'],
     methods: {

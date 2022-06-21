@@ -44,11 +44,19 @@
                         Remove common videos
                     </label>    
                 </div>
-                <div class="control">
+                <div class="control mr-5">
                     <label class="checkbox">
                         <input type="checkbox" v-model="removeNoSlant">
                         Remove videos with no slant
                     </label>    
+                </div>
+                <div class="control">
+                    <button @click="download()" class="button" :disabled="!topVideos">
+                        <span class="icon is-small">
+                            <i class="fas fa-download"></i>
+                        </span>
+                        <span>Download</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -94,6 +102,7 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/plugin/utc.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/plugin/customParseFormat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <script src="../common/js/api.js"></script>
     <script src="../common/js/scripts.js"></script>
     <script src="../common/components/youtube-video.js"></script>
