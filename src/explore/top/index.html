@@ -30,27 +30,32 @@
     <article class="section" id="app">
         <div class="container is-max-desktop top-controls">
 
-            <div class="is-flex is-justify-content-space-between is-align-items-center">
-                <span class="has-text-danger mr-1">Collection Date</span>
-                <div class="control datepicker has-icons-left" v-if="dates">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-calendar"></i>
-                    </span>
-                    <vuejs-datepicker v-model="selectedDate" class="input" @selected="loadDate" :use-utc="true" :disabled-dates="disabledDates"></vuejs-datepicker>
+            <div class="is-flex is-justify-content-space-around is-align-items-center is-flex-wrap-wrap">
+                <div class="is-flex is-align-items-center mt-1">
+                    <span class="has-text-danger mr-2">Date</span>
+                    <div class="control datepicker has-icons-left" v-if="dates">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-calendar"></i>
+                        </span>
+                        <vuejs-datepicker v-model="selectedDate" class="input" @selected="loadDate" :use-utc="true" :disabled-dates="disabledDates"></vuejs-datepicker>
+                    </div>
                 </div>
-                <div class="control ml-auto mr-5">
-                    <label class="checkbox">
-                        <input type="checkbox" v-model="removeCommon">
-                        Remove common videos
-                    </label>    
+                <div class="is-flex mt-1">
+                    <div class="control ml-auto mr-5">
+                        <label class="checkbox">
+                            <input type="checkbox" v-model="removeCommon">
+                            Remove common videos
+                        </label>    
+                    </div>
+                    <div class="control mr-5">
+                        <label class="checkbox">
+                            <input type="checkbox" v-model="removeNoSlant">
+                            Remove videos with no slant
+                        </label>    
+                    </div>
                 </div>
-                <div class="control mr-5">
-                    <label class="checkbox">
-                        <input type="checkbox" v-model="removeNoSlant">
-                        Remove videos with no slant
-                    </label>    
-                </div>
-                <div class="control">
+                
+                <div class="control mt-1">
                     <button @click="download()" class="button" :disabled="!topVideos">
                         <span class="icon is-small">
                             <i class="fas fa-download"></i>
@@ -66,30 +71,39 @@
                 <div class="column">
                     <h2 class="subtitle">Left</h2>
                     <youtube-video :video-id="video" v-for="video in leftVideos" :key="video"
-                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" class="mt-6"></youtube-video>
                 </div>
                 <!-- <div class="column">
                     <h2 class="subtitle">Center-left</h2>
                     <youtube-video :video-id="video" v-for="video in centerLeftVideos" :key="video"
-                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" class="mt-6"></youtube-video>
                 </div> -->
                 <div class="column">
                     <h2 class="subtitle">Center</h2>
                     <youtube-video :video-id="video" v-for="video in centerVideos" :key="video"
-                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" class="mt-6"></youtube-video>
                 </div>
                 <!-- <div class="column">
                     <h2 class="subtitle">Center-right</h2>
                     <youtube-video :video-id="video" v-for="video in centerRightVideos" :key="video"
-                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" class="mt-6"></youtube-video>
                 </div> -->
                 <div class="column">
                     <h2 class="subtitle">Right</h2>
                     <youtube-video :video-id="video" v-for="video in rightVideos" :key="video"
-                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" :hide-unks="removeNoSlant" class="mt-6"></youtube-video>
+                        :metadata="topVideos.metadata[video]" :slant="topVideos.slants[video]" class="mt-6"></youtube-video>
                 </div>
             </div>
+            <div class="has-text-centered">
+                <button @click="loadMore()" class="button" :disabled="loadedAll">
+                    <span class="icon is-small">
+                        <i class="fas fa-angle-down"></i>
+                    </span>
+                    <span>Load more</span>
+                </button>
+            </div>
         </div>
+
     </article>
 
 

@@ -8,7 +8,8 @@ const app = new Vue({
         topVideos: null,
         commonVideos: null,
         removeCommon: true,
-        removeNoSlant: false
+        removeNoSlant: false,
+        loadCount: 2
     },
 
     methods: {
@@ -19,6 +20,7 @@ const app = new Vue({
 
         loadDate: async function(date) {
             const formatted = dayjs(date).utc().format('YYYY-MM-DD');
+            this.loadCount = 3;
             this.topVideos = await getTopVideos(formatted);
         },
 
@@ -33,11 +35,21 @@ const app = new Vue({
                 return [];
             }
 
-            if (!this.removeCommon) {
-                return this.topVideos[key];
+            let videos = this.topVideos[key];
+
+            if (this.removeCommon) {
+                videos = videos.filter(x => !this.topVideos.common_videos.includes(x));
             }
-            
-            return this.topVideos[key].filter(x => !this.topVideos.common_videos.includes(x));
+
+            if (this.removeNoSlant) {
+                videos = videos.filter(x => this.topVideos.slants[x] && this.topVideos.slants[x].slant);
+            }
+
+            return videos;
+        },
+
+        loadMore: function() {
+            this.loadCount += 2;
         }
 
     },
@@ -61,23 +73,27 @@ const app = new Vue({
         },
 
         leftVideos: function() {
-            return this.getVideoList('Far Left');
+            return this.getVideoList('Far Left').slice(0, this.loadCount);
         },
 
         centerLeftVideos: function() {
-            return this.getVideoList('Left');
+            return this.getVideoList('Left').slice(0, this.loadCount);
         },
 
         centerVideos: function() {
-            return this.getVideoList('Moderate');
+            return this.getVideoList('Moderate').slice(0, this.loadCount);
         },
 
         centerRightVideos: function() {
-            return this.getVideoList('Right');
+            return this.getVideoList('Right').slice(0, this.loadCount);
         },
 
         rightVideos: function() {
-            return this.getVideoList('Far Right');
+            return this.getVideoList('Far Right').slice(0, this.loadCount);
+        },
+
+        loadedAll: function() {
+            return (this.loadCount >= 10);
         }
     
     },
