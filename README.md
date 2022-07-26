@@ -31,7 +31,7 @@ Programmatically interact with YouTube's interface.
 Sock puppet implementation for collecting YouTube data.
 
 ### [YouTube Slant Estimation](https://github.com/ucdavis-noyce/YouTube-Slant-Estimation)
-Estimate the ideological slant of a YouTube video using the Twitter API.
+Estimate the ideological slant of a YouTube video using the Twitter API. Also provides an abstraction over `youtube-dl` for collecting video metadata.
 
 ## Citation
 ```
