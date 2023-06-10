@@ -24,11 +24,11 @@
     background: rgba(0, 0, 255, 1);
 }
 
-.top-videos.columns .column:nth-child(2) .subtitle {
+/* .top-videos.columns .column:nth-child(2) .subtitle {
     background: purple;
-}
+} */
 
-.top-videos.columns .column:nth-child(3) .subtitle {
+.top-videos.columns .column:nth-child(2) .subtitle {
     background: rgba(255, 0, 0, 1);
 }
 
