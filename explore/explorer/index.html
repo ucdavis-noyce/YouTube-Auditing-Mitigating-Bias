@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sock Puppet Explorer | YouTube, The Great Radicalizer?</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- <script>
+        const PAGE_NAME = 'explore';
+    </script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-187WWF7R0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-187WWF7R0T');
+    </script>
+</head>
+
+<body>
+
+    <header class="section">
+        <div class="container is-max-desktop">
+            <h1 class="title mb-2 has-text-centered">
+                YouTube, The Great <span class="has-text-danger">Radicalizer?</span>
+            </h1>
+            <h1 class="title  is-size-4 has-text-weight-normal has-text-centered">
+                Auditing and Mitigating Ideological Biases in YouTube Recommendations
+            </h1>
+            <br>
+            <div class="has-text-centered" id="nav">
+                <a href="/about" class="button has-text-danger border-none">About</a>
+                <a href="https://arxiv.org/pdf/2203.10666.pdf" target="_blank" class="button has-text-danger border-none">Preprint</a>
+                <a href="/explore" class="button has-text-danger border-none">Explore</a>
+                <a href="/code" class="button has-text-danger border-none">Code</a>
+                <a href="/faqs" class="button has-text-danger border-none">FAQs</a>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        const nav = document.getElementById('nav');
+        const navItems = nav.getElementsByTagName('a');
+        for (const navItem of navItems) {
+            if (navItem.innerHTML.toLowerCase().includes(PAGE_NAME)) {
+                navItem.classList.add('is-danger');
+                navItem.classList.remove('has-text-danger');
+            }
+        }
+    </script>
+
+    <article class="section">
+        <div class="container is-max-desktop has-text-centered">
+            <a class="subtitle has-text-danger has-text-weight-bold mb-3">Sock Puppet Explorer</a>
+            <p>
+                Explore the data for each individual sock puppet.
+            </p>
+        </div>
+    </article>
+
+
+    <article class="section" id="app">
+        <div class="container is-max-desktop">
+
+            <p class="has-text-centered is-size-5 mb-4"><span class="has-text-danger has-text-weight-bold">Sock Puppet Ideology</p>
+
+            <div class="tabs is-boxed">
+                <ul class="is-justify-content-space-around">
+                    <li v-for="ideology in ideologies" @click="setIdeology(ideology)"
+                        :class="{'is-active': selectedIdeology == ideology}">
+                        <a :class="{'has-text-danger': selectedIdeology == ideology}">{{ ideology }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- <div class="has-text-centered mt-6" v-if="selectedIdeology">
+                <h2 class="is-size-6">
+                    The total number of <span class="has-text-danger">{{ selectedIdeology }}</span> ideology sock puppets is <span class="has-text-danger">{{ numSockPuppets }}</span>.
+                </h2>
+            </div> -->
+
+            <!-- <br><br><br> -->
+
+            <!-- <p v-if="selectedIdeology" class="has-text-centered is-size-5 mb-6"><span class="has-text-danger has-text-weight-bold">Step 2</span><br>Enter a sock puppet ID or click Random</p> -->
+
+            <div class="is-flex mt-6">
+                <div class="ml-1 is-flex is-flex-direction-column">
+                    <input class="input" type="text" placeholder="Sock puppet ID" v-model="puppetId"
+                        v-if="selectedIdeology">
+                    <span class="ml-1"><span class="has-text-danger">{{ numSockPuppets | number }}</span> total sock
+                        puppets.</span>
+                </div>
+                <div class="ml-1">
+                    <button @click="loadPuppet(puppetId)" class="button" :disabled="selectedPuppetId == puppetId"
+                        v-if="selectedIdeology">
+                        <span class="icon is-small">
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                        </span>
+                        <span>Fetch</span>
+                    </button>
+                    <button @click="loadRandom()" class="button" v-if="selectedIdeology">
+                        <span class="icon is-small">
+                            <i class="fas fa-shuffle" aria-hidden="true"></i>
+                        </span>
+                        <span>Random</span>
+                    </button>
+                </div>
+                <div class="ml-auto">
+                    <button @click="downloadPuppet(puppetId)" class="button"
+                        v-if="selectedIdeology && selectedPuppetId">
+                        <span class="icon is-small">
+                            <i class="fas fa-download"></i>
+                        </span>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="has-text-centered mt-6" v-if="selectedPuppetId">
+                <h2 class="is-size-6">
+                    Sock puppet <span class="has-text-danger">#{{ selectedPuppetId | number }}</span> was collected on <span class="has-text-danger">{{ sockPuppetDate }}</span>.
+                </h2>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+            <!-- <p v-if="selectedPuppetId" class="has-text-centered is-size-5 mt-6 mb-6"><span class="has-text-danger has-text-weight-bold">Step 3</span><br>Select which videos from the sock puppet to view</p> -->
+            <p class="has-text-centered is-size-5 mb-4"><span class="has-text-danger has-text-weight-bold">Videos/Recommendations to view</p>
+
+            <div class="tabs mt-6 is-boxed" v-if="selectedPuppetId">
+                <ul class="is-justify-content-space-around">
+                    <li @click="panel = 'training'" :class="{'is-active': panel == 'training'}"><a
+                            :class="{'has-text-danger':  panel == 'training'}">Training</a></li>
+                    <li @click="panel = 'homepage'" :class="{'is-active': panel == 'homepage'}"><a
+                            :class="{'has-text-danger':  panel == 'homepage'}">Homepage</a></li>
+                    <li @click="panel = 'testing'" :class="{'is-active': panel == 'testing' }"><a
+                            :class="{'has-text-danger':  panel == 'testing'}">Up-next</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="container is-fluid mt-6">
+
+            <div class="videos" v-if="panel == 'training'">
+                <youtube-video :video-id="video" v-for="video in trainingData" :key="video.videoId"
+                    :metadata="puppetData.metadata[video]" :slant="puppetData.slants[video]" hide-embed="true">
+                </youtube-video>
+            </div>
+
+
+            <div class="videos" v-if="panel == 'homepage'">
+                <youtube-video :video-id="video" v-for="video in homepageData" :key="video.videoId"
+                    :metadata="puppetData.metadata[video]" :slant="puppetData.slants[video]"></youtube-video>
+            </div>
+
+
+            <div class="recommendation-trail" v-if="panel == 'testing'">
+                <ul class="recommendation" v-for="(videos, iteration) in testingData" :key="videos">
+                    <li v-for="video in videos.slice(0,1)" :key="video.videoId">
+                        <p class="mb-4">Trail depth: {{ iteration }}</p>
+                        <youtube-video :video-id="video" :metadata="puppetData.metadata[video]"
+                            :slant="puppetData.slants[video]"></youtube-video>
+                        <span class="right-arrow mb-6"><i class="fa-solid fa-arrow-down"></i></span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </article>
+
+    <footer class="footer has-background-white pb-3">
+        <div class="container is-max-desktop has-text-centered">
+            <img src="/img/ucdavis.png" />
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.0/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/plugin/relativeTime.js"></script>
+    <script src="../common/js/api.js"></script>
+    <script src="../common/js/scripts.js"></script>
+    <script src="../common/components/youtube-video.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

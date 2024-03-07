@@ -1,0 +1,39 @@
+.top-videos.columns .youtube-video {
+    vertical-align: top;
+}
+
+.top-videos.columns .column  {
+    text-align: center;
+}
+
+.top-videos.columns .column .subtitle {
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+    font-size: 1.25em;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 380px;
+    margin: 0 auto;
+}
+
+.top-videos.columns .column:nth-child(1) .subtitle {
+    background: rgba(0, 0, 255, 1);
+}
+
+/* .top-videos.columns .column:nth-child(2) .subtitle {
+    background: purple;
+} */
+
+.top-videos.columns .column:nth-child(2) .subtitle {
+    background: rgba(255, 0, 0, 1);
+}
+
+.top-controls {
+    border: solid 1px #aaa;
+    border-radius: 4px;
+    padding: 8px 12px;
+}

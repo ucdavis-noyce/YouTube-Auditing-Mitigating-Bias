@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | YouTube, The Great Radicalizer?</title>
+    <script>const PAGE_NAME = 'faqs';</script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-187WWF7R0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-187WWF7R0T');
+    </script>
+</head>
+
+<body>
+
+    <header class="section">
+        <div class="container is-max-desktop">
+            <h1 class="title mb-2 has-text-centered">
+                YouTube, The Great <span class="has-text-danger">Radicalizer?</span>
+            </h1>
+            <h1 class="title  is-size-4 has-text-weight-normal has-text-centered">
+                Auditing and Mitigating Ideological Biases in YouTube Recommendations
+            </h1>
+            <br>
+            <div class="has-text-centered" id="nav">
+                <a href="/about" class="button has-text-danger border-none">About</a>
+                <a href="https://arxiv.org/pdf/2203.10666.pdf" target="_blank" class="button has-text-danger border-none">Preprint</a>
+                <a href="/explore" class="button has-text-danger border-none">Explore</a>
+                <a href="/code" class="button has-text-danger border-none">Code</a>
+                <a href="/faqs" class="button has-text-danger border-none">FAQs</a>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        const nav = document.getElementById('nav');
+        const navItems = nav.getElementsByTagName('a');
+        for (const navItem of navItems) {
+            if (navItem.innerHTML.toLowerCase().includes(PAGE_NAME)) {
+                navItem.classList.add('is-danger');
+                navItem.classList.remove('has-text-danger');
+            }
+        }
+    </script>
+
+    <article class="section">
+        <div class="container is-max-desktop">
+            <h2 class="subtitle has-text-danger has-text-weight-bold">Frequently Asked Questions</h2>
+
+            <p class="has-text-danger has-text-weight-bold">What are sock puppets?</p>
+            <p class="">
+                A sock puppet is an automated browser instance that watches videos on YouTube. The sock puppets are <em>“trained”</em> by watching videos of a specific political ideology. We then <em>“test”</em> the homepage and up-next recommendations of the sock puppet for ideological bias.
+            </p>
+            <div class="has-text-centered mt-2">
+                <img src="/img/blockdiagram.png" alt="Homepage" class="box ml-auto mr-auto">
+            </div>
+            
+            <br>
+            <br>           
+            
+            <p class="has-text-danger has-text-weight-bold">What are homepage recommendations?</p>
+            <p class="">
+                The homepage recommendations are the recommendations that appear on the <a href="https://youtube.com/" target="_blank">YouTube homepage</a>. In the image below, the videos within the red border are the homepage recommendations collected from each sock puppet.
+            </p>
+            <div class="has-text-centered mt-2">
+                <img src="/img/homepage.jpg" alt="Homepage" class="box ml-auto mr-auto">
+            </div>
+
+            
+            <br>
+            <br>
+
+            <p class="has-text-danger has-text-weight-bold">What are up-next recommendations?</p>
+            <p class="">
+                When a user watches a video, YouTube presents them with a series of videos to watch next. These recommendations are known as up-next recommendations and we refer to the currently playing video that triggered them as the <em>“seed video”</em>. In the image below, the video in the blue border is currently playing and is the seed video to the up-next recommendations in the red border.
+            </p>
+            <div class="has-text-centered mt-2">
+                <img src="/img/upnext.jpg" alt="Up-next" class="box ml-auto mr-auto">
+            </div>
+
+            <br>
+            <br>
+
+            <p class="has-text-danger has-text-weight-bold">How do you estimate the ideology of a video?</p>
+            <p class="">The ideology of a video is estimated by analyzing its sharing patterns on Twitter. Specifically, we collect the tweets mentioning a given YouTube video using the Twitter API and check if the authors of those tweets follow a set of well-recognized partisan elites, i.e., landmarks, whose political ideology is clearly established as either liberal or conservative. Counting the total number of landmarks followed by the authors of those tweets, we estimate the slant on a scale of -1 (most liberal) to +1 (most conservative) as:
+            </p>
+            <div class="has-text-centered mt-2">
+                <img src="/img/slant_equation.gif" alt="Slant = (conservative_landmarks - liberal_landmarks) / (conservative_landmarks + liberal_landmarks)" width="400" class="box ml-auto mr-auto">
+            </div>
+        </div>
+    </article>
+
+
+    <footer class="footer has-background-white pb-3">
+        <div class="container is-max-desktop has-text-centered">
+            <img src="/img/ucdavis.png" />
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
